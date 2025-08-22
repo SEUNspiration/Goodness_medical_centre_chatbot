@@ -1,20 +1,20 @@
-import google.generativeai as genai
-import config # Import the config file
+#import google.generativeai as genai
+#import config # Import the config file
 
 # Configure the Gemini API
 # The API key is automatically provided by the Canvas environment if left empty in config.py
-genai.configure(api_key=config.GEMINI_API_KEY)
+# genai.configure(api_key=config.GEMINI_API_KEY)
 
 # Initialize the Gemini model
 # Using 'gemini-2.0-flash' as specified in the instructions.
 # The system_instruction is crucial for guiding the model's behavior.
-model = genai.GenerativeModel(
+# model = genai.GenerativeModel(
     model_name=config.GEMINI_MODEL_NAME,
     system_instruction=config.GEMINI_SYSTEM_INSTRUCTIONS
 )
 
 # --- Function to get response from Gemini ---
-def get_gemini_response(query):
+# def get_gemini_response(query):
     """
     Sends a query to the Gemini model and returns its response.
     Includes error handling for API calls.
@@ -22,7 +22,7 @@ def get_gemini_response(query):
     try:
         # For a simple Q&A, we can use generate_content directly.
         # For multi-turn conversations, you'd use model.start_chat().
-        response = model.generate_content(query)
+        # response = model.generate_content(query)
         # Access the text from the first part of the first candidate
         if response.candidates and response.candidates[0].content and response.candidates[0].content.parts:
             return response.candidates[0].content.parts[0].text
@@ -67,4 +67,4 @@ def get_chatbot_response(user_query):
     # 4. --- Fallback to Gemini for Intelligent Responses ---
     # If no specific rule or static knowledge base entry matches, use Gemini.
     # Add a loading indicator in the Streamlit app when calling this.
-    return get_gemini_response(user_query)
+    # return get_gemini_response(user_query)
